@@ -1,136 +1,105 @@
-# Hardware Product Development & NPI Governance Framework
-# Case-grounded hardware NPI execution framework based on a fully custom 4G IoT program (EVT–DVT–PVT–MP).
+# Hardware Product Development & NPI Governance Framework 
 
-**Case-grounded framework built from a fully custom 4G IoT alarming system program (EVT → DVT → PVT → MP, EU & US).**
-
-This repository documents the execution structure I use to take a **fully custom hardware ecosystem** from early builds through mass production, with an emphasis on:
-- cross-vendor dependency control
-- stage-gated build execution
-- production-line quality + functional test governance
-- tooling iteration discipline
-- certification coordination (as part of DVT execution)
+This repository captures the control system used to run a fully custom 4G IoT alarming system program through EVT → DVT → PVT → Mass Production (EU & US).
+It is written as an owner-style governance model: define what can drift, set gates, and enforce convergence before ramp.
 
 ---
 
-## 1) What “NPI Governance” Means Here
-This is not a theoretical framework. It is an execution model to keep one program under control when:
-- every major subsystem is custom-developed
-- multiple vendors must move in parallel
-- builds are stage-gated (EVT/DVT/PVT)
-- quality gates must be enforced before ramp
+## 0) Program Baseline (What was custom)
+The reference program was a fully custom hardware ecosystem:
+- 4G SIM communication module integration
+- 8-sensor pairing behaviour (system-level function)
+- Custom PCBA
+- New injection-moulded plastic housing (tooling required)
+- Custom silicone components
+- Precision metal components
+- Retail color box packaging & accessory kitting
+
+No off-the-shelf enclosure or packaging platform was used.
 
 ---
 
-## 2) System Scope (from the reference case)
-A fully custom hardware ecosystem typically includes:
-- 4G cellular communication module integration
-- multi-sensor pairing functionality (system-level behavior)
-- custom PCBA manufacturing
-- injection-molded plastic housing (new tooling)
-- custom silicone components
-- precision metal parts
-- retail color box packaging & accessory kitting
-
-**Key point:** no off-the-shelf enclosure or packaging platform was used.
+## 1) Governance Goal (What we prevented)
+NPI governance existed to prevent four failure modes:
+1) Stage drift: moving forward without readiness
+2) Tooling drift: T1/T2/T3 loops not converging (warpage/shrinkage/cosmetics)
+3) Vendor drift: cross-vendor schedules and dependencies desynchronizing
+4) Ramp drift: defects propagating into MP without containment
 
 ---
 
-## 3) Stage-Gated Execution (EVT → DVT → PVT → MP)
+## 2) Gate Authority Model (EVT → DVT → PVT → MP)
 
-### EVT — Engineering Validation Test
-Purpose: prove feasibility and integration path early.
-Typical controls:
-- CNC prototype builds for early validation
-- housing-to-PCBA mechanical integration checks
-- early feasibility checks for sensor pairing behavior
-- initial assembly process evaluation (process direction only)
+### EVT Gate — Engineering Feasibility Convergence
+**Entry:** design inputs available for prototype build and integration checks.
+**Exit (must be true before DVT):**
+- CNC prototype build completed for integration learning
+- Housing-to-PCBA integration is mechanically workable
+- Sensor pairing feasibility is demonstrated at engineering level
+- Initial assembly direction is defined (not optimized yet)
 
-### DVT — Design Validation Test
-Purpose: validate reliability + key functions and execute certification work.
-Typical controls (case-grounded):
-- IPX7 waterproof validation execution
-- high/low temperature testing coordination
-- impact and drop testing coordination
-- full multi-sensor pairing validation
-- 4G communication stability verification
-- audio / volume adjustment verification
-- certification execution coordination (CE / FCC )
+### DVT Gate — Design & Compliance Convergence
+**Entry:** EVT learnings closed with design updates ready for validation builds.
+**Exit (must be true before PVT):**
+- Core functional stability verified:
+  - Multi-sensor pairing stability
+  - 4G communication stability
+  - Audio volume adjustment works consistently
+- Reliability validation executed for program needs:
+  - IPX7 waterproof validation
+  - High/low temperature validation
+  - Drop & impact validation
+- CE and FCC compliance testing coordination completed
+- Design revisions frozen after DVT validation
 
-### PVT — Production Validation Test
-Purpose: validate production repeatability and line readiness.
-Typical controls:
-- manufacturing repeatability confirmation
-- yield trend and stability tracking
-- firmware flashing stability verification
-- production line test readiness and coverage confirmation
-- packaging QC + kitting rules verification (to prevent missing parts / disputes)
-- shipment readiness review before MP authorization
+### PVT Gate — Production Repeatability Convergence
+**Entry:** design is frozen and tooling/line are ready to prove repeatability.
+**Exit (must be true before MP authorization):**
+- Tooling iteration is in a stable state (T1/T2/T3 loop closed)
+- Production line test is ready and coverage is confirmed
+- Firmware flashing stability verified on the line flow
+- Packaging quality criteria enforced and kitting verified (no missing parts risk)
+- Yield and test pass rate show stable trend (reference: ~95–97% yield, ~96–98% pass rate)
 
-### MP — Mass Production
-Purpose: stabilize ramp and prevent defect propagation.
-Typical controls:
-- yield stabilization tracking
-- test pass rate stability tracking
-- line stop / escalation rules when critical failures appear
-- controlled change implementation after ramp starts
+### MP — Ramp & Containment Discipline
+After MP start, changes are controlled to avoid re-introducing instability.
+Critical functional deviations trigger containment actions (hold/stop/escalate) before shipment.
 
 ---
 
-## 4) Cross-Vendor Governance (the real workload)
-This framework assumes a multi-vendor setup such as:
-- tooling/molding (plastic housing)
-- silicone vendor
-- metal parts vendor
-- PCBA vendor
-- sensor vendor
-- packaging vendor
-- OEM assembly vendor (assembly execution)
-- logistics coordination (shipment execution readiness)
+## 3) Tooling & Mechanical Control (Injection Housing)
+The plastic housing required new tooling and T1/T2/T3 validation cycles.
+Tooling was governed until convergence across:
+- Warpage and shrinkage stabilization
+- Surface cosmetic standard enforcement
+- Dimensional alignment across mating parts
+- Assembly fit verification before stage progression
 
-**Execution requirement:** synchronize cost + lead time + build schedule + tooling iteration cycles + technical dependencies across vendors under one stage-gated plan.
+Tooling adjustments and injection parameter refinements were validated before moving to the next gate.
 
 ---
 
-## 5) Tooling & Manufacturing Control (case-grounded)
-For injection-molded housing programs:
-- T1 / T2 / T3 tooling iteration cycle governance
-- warpage and shrinkage stabilization through mold actions + injection parameter refinement
-- surface cosmetic criteria definition and enforcement
-- assembly fit validation before advancing to next NPI stage
+## 4) Production-Line Governance (Traceable Functional Control)
+The assembly line integrated the client’s proprietary testing software for device-level traceability and transparent test status monitoring.
+Functional coverage included multi-sensor pairing checks, 4G communication checks, and audio/volume verification.
+
+When critical functional inconsistency was detected, line progression was halted to prevent defect propagation.
 
 ---
 
-## 6) Production Quality + Functional Test Governance (case-grounded)
-This is the layer that prevents “works in lab” but fails in mass production.
+## 5) Cross-Vendor Synchronization (Dependency Control)
+The program required aligned execution across:
+tooling, molding, silicone, metal, PCBA, sensor, packaging, and OEM assembly.
 
-Controls include:
-- cosmetic acceptance criteria and inspection checkpoints
-- production-line functional coverage definition
-- line test governance and traceability readiness
-- integration of customer’s proprietary testing software (device-level transparency)
-- critical function protection rules (stop line / hold shipment when required)
-
----
-
-## 7) Cost Governance (case-grounded)
-- unit-level BOM cost breakdown ownership
-- price coordination across categories while maintaining functional and cosmetic standards
+Owner control meant synchronizing:
+- unit-level BOM cost breakdown
+- lead time dependencies across vendors
+- tooling iteration cycles against build schedules
+- stage timing so validation and ramp were not compromised
 
 ---
 
-## 8) What This Framework Proves (Capability Statement)
-This framework demonstrates:
-- full custom hardware ecosystem execution control
-- stage-gated NPI governance (EVT/DVT/PVT/MP)
-- tooling iteration control (T1–T3)
-- multi-vendor synchronization and dependency management
-- production-line quality + functional test governance
-- certification coordination during DVT execution
-- ramp stabilization through yield and pass-rate control
+## 6) What this model proves
+This framework demonstrates owner-level control of a fully custom hardware ecosystem:
+stage-gated governance, tooling convergence, traceable line testing, cross-vendor synchronization, compliance coordination, and ramp stabilization.
 
----
-
-## About
-Susu Chen  
-Hardware Product Development & NPI Program Execution (China supply chain)  
-Decision → Execution | Cross-vendor governance | Mass production readiness
