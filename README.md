@@ -1,4 +1,5 @@
 # Hardware Product Development & NPI Governance Framework 
+(4G IoT Alarming System | EU & US | 2016–2019 | 0→1 to Mass Production)
 
 This repository captures the control system used to run a fully custom 4G IoT alarming system program through EVT → DVT → PVT → Mass Production (EU & US).
 It is written as an owner-style governance model: define what can drift, set gates, and enforce convergence before ramp.
